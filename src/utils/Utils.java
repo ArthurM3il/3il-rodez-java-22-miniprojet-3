@@ -4,12 +4,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Utils {
     private static final String pathName = "mots.txt";
     private static int nbLigne;
+    private static Map<Integer, String> mots = new HashMap<>();
+    private static Map<String, String> definitions = new HashMap<>();
 
     public static void compterLignes() {
         nbLigne = 0;
@@ -29,31 +33,40 @@ public class Utils {
         }
     }
 
-    public static String lireMotAleatoire(){
-        int ligneALire = genererRandom(1, nbLigne);
-        String[] line = new String[0];
+    public static void lireMotsEtDefinitions(){
+        int i = 0;
         try {
-            //lire le fichier file.txt
-            FileReader file = new FileReader(pathName);
-            BufferedReader buffer = new BufferedReader(file);
+            // Créer l'objet File Reader
+            FileReader fr = new FileReader(pathName);
+            // Créer l'objet BufferedReader
+            BufferedReader br = new BufferedReader(fr);
+            String line = br.readLine();
 
-            // parcourir le fichier
-            for (int i = 1; i <= ligneALire ; i++) {
-                if (i == ligneALire)
-                    line = buffer.readLine().split(" ");
-                else
-                    buffer.readLine();
+            while(line != null)
+            {
+                i++;
+                String[] splitedLine = line.split(" ");
+                int splitedLength = splitedLine[0].length();
+                mots.put(i,splitedLine[0]);
+                String definition = line.substring(splitedLength);
+                definitions.put(splitedLine[0], definition);
+                line = br.readLine();
             }
-        } catch (IOException e) {
+
+        }catch (Exception e){
             e.printStackTrace();
         }
-        return line[0];
+    }
+
+    public static String getRandomWord(){
+        int randomIndex = genererRandom(1, nbLigne);
+
+        return mots.get(randomIndex);
     }
 
     private static int genererRandom(int borneInf, int borneSup){
         Random random = new Random();
-        int nb;
-        nb = borneInf + random.nextInt(borneSup - borneInf);
-        return nb;
+        return borneInf + random.nextInt(borneSup - borneInf);
+
     }
 }
