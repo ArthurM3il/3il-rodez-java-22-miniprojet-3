@@ -9,7 +9,7 @@ public class Tests {
     JeuModele modele = new JeuModele();
     @Test
     public void testMethodeModele() {
-        Assert.assertEquals(modele.isLetterInWord("("),false);
+        Assert.assertFalse(modele.isLetterInWord("("));
     }
 
     @Test
