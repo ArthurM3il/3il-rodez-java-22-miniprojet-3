@@ -18,6 +18,9 @@ public class JeuVue extends JFrame {
     private int essais = 10;
     private JFrame gestionResultat;
     public JeuVue(){
+        Utils.compterLignes();
+        Utils.lireMotsEtDefinitions();
+
         setTitle("Pendu");
         setSize(1080,720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
