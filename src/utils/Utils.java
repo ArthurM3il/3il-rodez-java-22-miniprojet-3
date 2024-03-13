@@ -15,7 +15,7 @@ public class Utils {
     private static Map<Integer, String> mots = new HashMap<>();
     private static Map<String, String> definitions = new HashMap<>();
 
-    public static void compterLignes() {
+    public static int compterLignes() {
         nbLigne = 0;
         try {
             File file = new File(pathName);
@@ -31,6 +31,7 @@ public class Utils {
         } catch (Exception e) {
             e.getStackTrace();
         }
+        return nbLigne;
     }
 
     public static void lireMotsEtDefinitions(){
