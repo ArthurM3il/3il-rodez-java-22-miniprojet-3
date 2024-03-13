@@ -64,6 +64,10 @@ public class Utils {
         return mots.get(randomIndex);
     }
 
+    public static String getDefintion(String mot){
+        return definitions.get(mot);
+    }
+
     private static int genererRandom(int borneInf, int borneSup){
         Random random = new Random();
         return borneInf + random.nextInt(borneSup - borneInf);
